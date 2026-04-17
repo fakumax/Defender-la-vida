@@ -1,0 +1,93 @@
+---
+import merge from 'lodash.merge';
+
+import { SITE, METADATA, I18N } from 'astrowind:config';
+import type { MetaData } from '~/types';
+import { getCanonical } from '~/utils/permalinks';
+
+import { adaptOpenGraphImages } from '~/utils/images';
+
+export interface Props extends MetaData {
+  dontUseTitleTemplate?: boolean;
+}
+
+const {
+  title,
+  ignoreTitleTemplate = false,
+  canonical = String(getCanonical(String(Astro.url.pathname))),
+  robots = {},
+  description,
+  openGraph = {},
+  twitter = {},
+} = Astro.props;
+
+const seoProps = merge(
+  {
+    title: '',
+    titleTemplate: '%s',
+    canonical: canonical,
+    noindex: true,
+    nofollow: true,
+    description: undefined as string | undefined,
+    openGraph: {
+      url: canonical,
+      site_name: SITE?.name,
+      images: [] as Array<{ url: string; width?: number; height?: number }>,
+      locale: I18N?.language || 'en',
+      type: 'website',
+    },
+    twitter: {
+      cardType: openGraph?.images?.length ? 'summary_large_image' : 'summary',
+    },
+  },
+  {
+    title: METADATA?.title?.default,
+    titleTemplate: METADATA?.title?.template,
+    noindex: typeof METADATA?.robots?.index !== 'undefined' ? !METADATA.robots.index : undefined,
+    nofollow: typeof METADATA?.robots?.follow !== 'undefined' ? !METADATA.robots.follow : undefined,
+    description: METADATA?.description,
+    openGraph: METADATA?.openGraph,
+    twitter: METADATA?.twitter,
+  },
+  {
+    title: title,
+    titleTemplate: ignoreTitleTemplate ? '%s' : undefined,
+    canonical: canonical,
+    noindex: typeof robots?.index !== 'undefined' ? !robots.index : undefined,
+    nofollow: typeof robots?.follow !== 'undefined' ? !robots.follow : undefined,
+    description: description,
+    openGraph: { url: canonical, ...openGraph },
+    twitter: twitter,
+  }
+);
+
+const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
+const computedTitle = seoProps.titleTemplate ? seoProps.titleTemplate.replace('%s', seoProps.title || '') : seoProps.title;
+const robotsContent = [
+  seoProps.noindex ? 'noindex' : 'index',
+  seoProps.nofollow ? 'nofollow' : 'follow',
+].join(', ');
+---
+
+<title>{computedTitle}</title>
+{seoProps.description && <meta name="description" content={seoProps.description} />}
+<meta name="robots" content={robotsContent} />
+{seoProps.canonical && <link rel="canonical" href={seoProps.canonical} />}
+
+{og?.site_name && <meta property="og:site_name" content={og.site_name} />}
+{og?.type && <meta property="og:type" content={og.type} />}
+{computedTitle && <meta property="og:title" content={computedTitle} />}
+{seoProps.description && <meta property="og:description" content={seoProps.description} />}
+{og?.url && <meta property="og:url" content={og.url} />}
+{og?.locale && <meta property="og:locale" content={og.locale} />}
+{og?.images?.map((image: { url: string; width?: number; height?: number }) => (
+  <>
+    {image.url && <meta property="og:image" content={image.url} />}
+    {image.width && <meta property="og:image:width" content={String(image.width)} />}
+    {image.height && <meta property="og:image:height" content={String(image.height)} />}
+  </>
+))}
+
+{seoProps.twitter?.cardType && <meta name="twitter:card" content={seoProps.twitter.cardType} />}
+{computedTitle && <meta name="twitter:title" content={computedTitle} />}
+{seoProps.description && <meta name="twitter:description" content={seoProps.description} />}

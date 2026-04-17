@@ -1,0 +1,56 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getPosts } from '~/lib/wp';
+
+const metadata = {
+  title: 'Noticias',
+  description: 'Últimas noticias de la Asociación Hablemos de Defender la Vida.',
+};
+
+const posts = await getPosts();
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-7xl">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">
+        Últimas Noticias
+      </h1>
+      <p class="max-w-3xl mx-auto text-xl text-muted dark:text-slate-400">
+        Novedades y artículos de nuestra asociación.
+      </p>
+    </div>
+
+    {posts && posts.length > 0 ? (
+      <div class="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-3 -mb-6">
+        {posts.map((post: any) => (
+          <article class="mb-6 transition bg-white border border-gray-200 rounded-lg shadow-md dark:bg-slate-900 dark:border-gray-700 hover:shadow-lg">
+            {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
+              <a href={`/noticias/${post.slug}`}>
+                <img
+                  src={post._embedded['wp:featuredmedia'][0].source_url}
+                  alt={post.title.rendered}
+                  class="w-full h-52 object-cover rounded-t-lg"
+                  loading="lazy"
+                />
+              </a>
+            )}
+            <div class="p-6">
+              <h2 class="mb-2 text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
+                <a href={`/noticias/${post.slug}`} class="hover:text-primary transition" set:html={post.title.rendered} />
+              </h2>
+              <div class="mb-4 text-gray-500 dark:text-gray-400 line-clamp-3" set:html={post.excerpt.rendered} />
+              <a href={`/noticias/${post.slug}`} class="text-primary font-semibold hover:underline">
+                Leer más →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center p-12 bg-white dark:bg-slate-800 rounded-lg shadow-sm border dark:border-gray-700">
+        <p class="text-lg text-gray-600 dark:text-gray-400">No hay noticias publicadas en este momento. Creá una entrada desde WordPress.</p>
+      </div>
+    )}
+  </section>
+</Layout>
