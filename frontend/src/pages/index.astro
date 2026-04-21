@@ -7,20 +7,14 @@ import Features from '~/components/widgets/Features.astro';
 import Content from '~/components/widgets/Content.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import NoticiasLatestPosts from '~/components/widgets/NoticiasLatestPosts.astro';
 import HeroCarousel from '~/components/common/HeroCarousel.astro';
-import { getHeroSlides } from '~/lib/wp';
 import imagen1 from '~/assets/images/Imagen1.png';
 import imagen2 from '~/assets/images/Imagen2.png';
 
-const wpSlides = await getHeroSlides();
-
-const slides = wpSlides.length
-  ? wpSlides
-  : [
-      { image: imagen1.src, alt: 'Defender la Vida — prevención y acompañamiento' },
-      { image: imagen2.src, alt: 'Comunidad que cuida — Defender la Vida' },
-    ];
+const slides = [
+  { image: imagen1.src, alt: 'Defender la Vida — prevención y acompañamiento' },
+  { image: imagen2.src, alt: 'Comunidad que cuida — Defender la Vida' },
+];
 
 const metadata = {
   title: 'Hablemos de Defender la Vida — Prevención del suicidio en Posadas, Misiones',
@@ -148,13 +142,6 @@ const metadata = {
       { title: 'Jóvenes alcanzados', amount: '5k+' },
       { title: 'Familias acompañadas', amount: '500+' },
     ]}
-  />
-
-  <!-- Últimas noticias del blog ******************* -->
-  <NoticiasLatestPosts
-    id="publicaciones"
-    title="Últimas publicaciones"
-    information={`Artículos, reflexiones y materiales de nuestro equipo. También podés visitar la sección de Noticias para ver los talleres y acciones más recientes.`}
   />
 
   <!-- Call to action ******************* -->

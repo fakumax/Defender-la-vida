@@ -1,12 +1,50 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
   title: 'Contacto',
 };
+
+const channels = [
+  {
+    title: 'WhatsApp',
+    value: '+54 9 3764 38-5252',
+    href: 'https://wa.me/5493764385252',
+    icon: 'tabler:brand-whatsapp',
+  },
+  {
+    title: 'Email',
+    value: 'defenderlavida@gmail.com',
+    href: 'mailto:defenderlavida@gmail.com',
+    icon: 'tabler:mail',
+  },
+  {
+    title: 'Instagram',
+    value: '@asocdefenderlavida',
+    href: 'https://www.instagram.com/asocdefenderlavida/',
+    icon: 'tabler:brand-instagram',
+  },
+  {
+    title: 'Facebook',
+    value: 'AsocDefenderLaVida',
+    href: 'https://www.facebook.com/AsocDefenderLaVida/',
+    icon: 'tabler:brand-facebook',
+  },
+  {
+    title: 'Línea 135',
+    value: 'Asistencia al suicida · 24 hs',
+    href: 'tel:135',
+    icon: 'tabler:phone',
+  },
+  {
+    title: 'Ubicación',
+    value: 'Posadas, Misiones, Argentina',
+    icon: 'tabler:map-pin',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -47,44 +85,31 @@ const metadata = {
   />
 
   <!-- Redes y datos ******************* -->
-  <Features2
-    title="Otros canales"
-    subtitle="Estamos en redes sociales y por los canales tradicionales."
-    columns={2}
-    classes={{ items: { icon: 'w-8 h-8 mb-3 text-primary' } }}
-    items={[
-      {
-        title: 'WhatsApp',
-        description: '+54 9 3764 38-5252 — Escribinos, es el canal más rápido.',
-        icon: 'tabler:brand-whatsapp',
-      },
-      {
-        title: 'Correo electrónico',
-        description: 'defenderlavida@gmail.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Facebook',
-        description: 'facebook.com/defenderlavida',
-        icon: 'tabler:brand-facebook',
-      },
-      {
-        title: 'Instagram',
-        description: '@defenderlavida',
-        icon: 'tabler:brand-instagram',
-      },
-      {
-        title: 'Línea 135',
-        description: 'Línea gratuita de asistencia al suicida (24 hs).',
-        icon: 'tabler:phone',
-      },
-      {
-        title: 'Ubicación',
-        description: 'Posadas, Misiones, Argentina',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  />
+  <section class="px-4 sm:px-6 mx-auto lg:px-8 max-w-5xl py-8 md:py-12">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">Otros canales</h2>
+      <p class="text-muted mt-2">También podés encontrarnos acá.</p>
+    </div>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+      {channels.map(({ title, value, href, icon }) => {
+        const Tag = href ? 'a' : 'div';
+        return (
+          <li>
+            <Tag
+              {...(href ? { href, target: href.startsWith('http') ? '_blank' : undefined, rel: href.startsWith('http') ? 'noopener noreferrer' : undefined } : {})}
+              class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-primary hover:shadow-sm transition"
+            >
+              <Icon name={icon} class="w-5 h-5 text-primary flex-shrink-0" />
+              <span class="flex flex-col leading-tight">
+                <span class="text-sm font-semibold text-gray-900 dark:text-slate-100">{title}</span>
+                <span class="text-xs text-gray-600 dark:text-slate-400 break-all">{value}</span>
+              </span>
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
 
   <!-- Datos legales ******************* -->
   <section class="px-4 py-12 sm:px-6 mx-auto lg:px-8 max-w-4xl">

@@ -1,4 +1,4 @@
-import { getPermalink, getBlogPermalink } from './utils/permalinks';
+import { getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -15,10 +15,6 @@ export const headerData = {
       href: getPermalink('/que-hacemos'),
     },
     {
-      text: 'Noticias',
-      href: getPermalink('/noticias'),
-    },
-    {
       text: 'Contacto',
       href: getPermalink('/contacto'),
     },
@@ -33,7 +29,6 @@ export const footerData = {
       links: [
         { text: 'Quiénes somos', href: getPermalink('/quienes-somos') },
         { text: 'Qué hacemos', href: getPermalink('/que-hacemos') },
-        { text: 'Noticias', href: getPermalink('/noticias') },
         { text: 'Contacto', href: getPermalink('/contacto') },
       ],
     },
@@ -70,11 +65,12 @@ export const footerData = {
   ],
   socialLinks: [
     { ariaLabel: 'WhatsApp', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/5493764385252' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/defenderlavida' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/defenderlavida' },
+    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/AsocDefenderLaVida/' },
+    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/asocdefenderlavida/' },
     { ariaLabel: 'Email', icon: 'tabler:mail', href: 'mailto:defenderlavida@gmail.com' },
   ],
   footNote: `
-    © Hablemos de Defender la Vida · Posadas, Misiones, Argentina · Todos los derechos reservados.
+    © Hablemos de Defender la Vida · Posadas, Misiones, Argentina · Todos los derechos reservados.<br />
+    Desarrollado por <a class="text-primary hover:underline" href="https://github.com/FacundoVergara" target="_blank" rel="noopener noreferrer">Facundo Vergara</a>.
   `,
 };
