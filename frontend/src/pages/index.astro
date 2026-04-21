@@ -8,6 +8,19 @@ import Content from '~/components/widgets/Content.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import NoticiasLatestPosts from '~/components/widgets/NoticiasLatestPosts.astro';
+import HeroCarousel from '~/components/common/HeroCarousel.astro';
+import { getHeroSlides } from '~/lib/wp';
+import imagen1 from '~/assets/images/Imagen1.png';
+import imagen2 from '~/assets/images/Imagen2.png';
+
+const wpSlides = await getHeroSlides();
+
+const slides = wpSlides.length
+  ? wpSlides
+  : [
+      { image: imagen1.src, alt: 'Defender la Vida — prevención y acompañamiento' },
+      { image: imagen2.src, alt: 'Comunidad que cuida — Defender la Vida' },
+    ];
 
 const metadata = {
   title: 'Hablemos de Defender la Vida — Prevención del suicidio en Posadas, Misiones',
@@ -22,10 +35,6 @@ const metadata = {
       { variant: 'primary', text: 'Pedir ayuda', href: '/contacto', icon: 'tabler:heart-handshake' },
       { text: 'Conocé nuestro trabajo', href: '/quienes-somos' },
     ]}
-    image={{
-      src: '~/assets/images/Imagen1.png',
-      alt: 'Defender la Vida — prevención y acompañamiento',
-    }}
   >
     <Fragment slot="title">
       Hablemos de <span class="text-accent dark:text-white">Defender la Vida</span>
@@ -37,6 +46,10 @@ const metadata = {
       <span class="block mt-2 font-semibold text-red-600">
         Si estás pasando un momento difícil, llamá al 135 (línea gratuita) o al 911.
       </span>
+    </Fragment>
+
+    <Fragment slot="image">
+      <HeroCarousel slides={slides} autoplay={6000} />
     </Fragment>
   </Hero>
 

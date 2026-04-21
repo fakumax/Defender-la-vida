@@ -1,0 +1,137 @@
+---
+export interface Slide {
+  image: string;
+  title?: string;
+  excerpt?: string;
+  alt?: string;
+}
+
+export interface Props {
+  slides: Slide[];
+  autoplay?: number; // ms entre slides. 0 = desactivado
+  ariaLabel?: string;
+}
+
+const { slides, autoplay = 6000, ariaLabel = 'Carrusel' } = Astro.props;
+if (!slides?.length) return null;
+---
+
+<div
+  class="hero-carousel relative w-full overflow-hidden rounded-2xl shadow-lg"
+  data-autoplay={autoplay}
+  aria-roledescription="carousel"
+  aria-label={ariaLabel}
+>
+  <ul class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth">
+    {slides.map((s, i) => (
+      <li class="relative min-w-full snap-start aspect-[16/7] bg-gray-100 dark:bg-slate-800" aria-roledescription="slide" aria-label={`${i + 1} de ${slides.length}`}>
+        <img
+          src={s.image}
+          alt={s.alt ?? s.title ?? ''}
+          class="absolute inset-0 w-full h-full object-cover"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+        {(s.title || s.excerpt) && (
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 md:p-10 text-white">
+            {s.title && <h3 class="text-xl md:text-3xl font-bold font-heading" set:html={s.title} />}
+            {s.excerpt && <p class="mt-2 max-w-2xl text-sm md:text-base" set:html={s.excerpt} />}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+
+  {slides.length > 1 && (
+    <>
+      <button type="button" class="carousel-btn prev" aria-label="Slide anterior">‹</button>
+      <button type="button" class="carousel-btn next" aria-label="Slide siguiente">›</button>
+      <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        {slides.map((_, i) => (
+          <button type="button" class="dot" data-idx={i} aria-label={`Ir al slide ${i + 1}`}></button>
+        ))}
+      </div>
+    </>
+  )}
+</div>
+
+<style>
+  .carousel-track { scrollbar-width: none; }
+  .carousel-track::-webkit-scrollbar { display: none; }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.85);
+    color: #111;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: background .15s ease;
+    z-index: 10;
+  }
+  .carousel-btn:hover { background: #fff; }
+  .carousel-btn.prev { left: 0.75rem; }
+  .carousel-btn.next { right: 0.75rem; }
+
+  .dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.5);
+    transition: background .15s ease, transform .15s ease;
+  }
+  .dot[aria-current="true"] { background: #fff; transform: scale(1.3); }
+</style>
+
+<script>
+  function initCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLUListElement>('.carousel-track');
+    if (!track) return;
+    const slides = Array.from(track.children) as HTMLElement[];
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('.dot'));
+    const prev = root.querySelector<HTMLButtonElement>('.carousel-btn.prev');
+    const next = root.querySelector<HTMLButtonElement>('.carousel-btn.next');
+    const autoplay = Number(root.dataset.autoplay ?? 0);
+
+    let current = 0;
+    const goTo = (idx: number) => {
+      current = (idx + slides.length) % slides.length;
+      track.scrollTo({ left: slides[current].offsetLeft, behavior: 'smooth' });
+      dots.forEach((d, i) => d.setAttribute('aria-current', i === current ? 'true' : 'false'));
+    };
+    goTo(0);
+
+    prev?.addEventListener('click', () => goTo(current - 1));
+    next?.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((d) => d.addEventListener('click', () => goTo(Number(d.dataset.idx))));
+
+    // detectar scroll manual para sincronizar dots
+    let scrollTimer: number | undefined;
+    track.addEventListener('scroll', () => {
+      if (scrollTimer) window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        const idx = Math.round(track.scrollLeft / track.clientWidth);
+        if (idx !== current) {
+          current = idx;
+          dots.forEach((d, i) => d.setAttribute('aria-current', i === current ? 'true' : 'false'));
+        }
+      }, 80);
+    });
+
+    if (autoplay > 0 && slides.length > 1) {
+      let timer = window.setInterval(() => goTo(current + 1), autoplay);
+      root.addEventListener('mouseenter', () => window.clearInterval(timer));
+      root.addEventListener('mouseleave', () => (timer = window.setInterval(() => goTo(current + 1), autoplay)));
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('.hero-carousel').forEach(initCarousel);
+</script>

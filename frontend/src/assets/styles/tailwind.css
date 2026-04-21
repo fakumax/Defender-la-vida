@@ -5,6 +5,14 @@
 
 @custom-variant intersect (&:not([no-intersect]));
 
+/* Escala global ~90% para evitar que todo se vea enorme */
+html {
+  font-size: 93.75%;
+}
+@media (min-width: 1536px) {
+  html { font-size: 100%; }
+}
+
 @theme {
   --color-primary: var(--aw-color-primary);
   --color-secondary: var(--aw-color-secondary);
@@ -45,14 +53,15 @@
 }
 
 .btn {
-  @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-gray-400 bg-transparent font-sans font-medium text-center text-base text-page leading-snug transition py-3 px-7 md:px-8 ease-in duration-200 focus:ring-primary focus:ring-offset-2 focus:ring-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
 }
 
 .btn-primary {
-  @apply font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-primary font-sans font-semibold text-center text-base leading-snug transition py-3 px-7 md:px-8 ease-in duration-200 focus:ring-primary focus:ring-offset-2 focus:ring-2 bg-primary text-white shadow-sm hover:bg-secondary hover:border-secondary hover:text-white hover:shadow-md dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary cursor-pointer;
 }
 
 .btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-primary bg-transparent font-sans font-semibold text-center text-base leading-snug transition py-3 px-7 md:px-8 ease-in duration-200 focus:ring-primary focus:ring-offset-2 focus:ring-2 text-primary hover:bg-primary hover:text-white dark:text-primary dark:hover:text-white cursor-pointer;
 }
 
 .btn-tertiary {
