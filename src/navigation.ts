@@ -38,7 +38,6 @@ export const footerData = {
         { text: 'Prevención', href: '/que-hacemos#prevencion' },
         { text: 'Orientación', href: '/que-hacemos#orientacion' },
         { text: 'Postvención', href: '/que-hacemos#postvencion' },
-        { text: 'Grupos GARE', href: '/que-hacemos#gare' },
       ],
     },
     {
@@ -71,6 +70,6 @@ export const footerData = {
   ],
   footNote: `
     © Hablemos de Defender la Vida · Posadas, Misiones, Argentina · Todos los derechos reservados.<br />
-    Desarrollado por <a class="text-primary hover:underline" href="https://github.com/FacundoVergara" target="_blank" rel="noopener noreferrer">Facundo Vergara</a>.
+    Desarrollado por <a class="text-primary hover:underline" href="https://github.com/fakumax/" target="_blank" rel="noopener noreferrer">Facundo Vergara</a>.
   `,
 };
