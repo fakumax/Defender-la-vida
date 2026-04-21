@@ -1,0 +1,211 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Qué hacemos',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero ******************* -->
+  <Hero
+    tagline="Qué hacemos"
+    title="Prevención, contención y posvención"
+    subtitle="Nuestro trabajo se apoya en cuatro pilares que abordan la prevención del suicidio desde una mirada comunitaria e integral."
+    actions={[{ variant: 'primary', text: 'Pedir un taller', href: '/contacto', icon: 'tabler:calendar' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=1740&q=80',
+      alt: 'Taller comunitario',
+    }}
+  />
+
+  <!-- Pilares ******************* -->
+  <Features
+    title="Nuestros cuatro pilares"
+    subtitle="Un enfoque integral para acompañar a jóvenes, familias y comunidades."
+    columns={2}
+    items={[
+      {
+        title: 'Prevención',
+        description:
+          'Charlas, talleres y materiales para escuelas, clubes y organizaciones. Trabajamos la detección temprana de signos de alerta y la promoción de factores protectores.',
+        icon: 'tabler:shield-heart',
+      },
+      {
+        title: 'Orientación',
+        description:
+          'Espacio de escucha, contención y derivación para jóvenes en situación de riesgo, sus familias y equipos docentes o laborales.',
+        icon: 'tabler:message-circle-heart',
+      },
+      {
+        title: 'Posvención',
+        description:
+          'Acompañamiento a familias, amigos y comunidades que atravesaron la pérdida de un ser querido por suicidio.',
+        icon: 'tabler:heart-handshake',
+      },
+      {
+        title: 'Grupos GARE',
+        description:
+          'Grupos de Ayuda para Recuperar la Esperanza: encuentros entre pares, guiados por profesionales, para familiares en duelo.',
+        icon: 'tabler:users-group',
+      },
+    ]}
+  />
+
+  <!-- Prevención ******************* -->
+  <Content
+    id="prevencion"
+    isReversed
+    tagline="Prevención"
+    title="Talleres en escuelas y organizaciones"
+    items={[
+      {
+        title: 'Adolescentes y jóvenes',
+        description: 'Encuentros participativos para hablar de emociones, vínculos y búsqueda de ayuda.',
+        icon: 'tabler:user-heart',
+      },
+      {
+        title: 'Docentes y referentes',
+        description: 'Capacitación para identificar signos de alerta y actuar a tiempo.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Familias',
+        description: 'Espacios para acompañar a madres, padres y cuidadores en la escucha y el diálogo.',
+        icon: 'tabler:home-heart',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=2070&q=80',
+      alt: 'Taller en escuela',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Actuar antes</h3>
+      <p>La prevención es posible cuando la comunidad entera se compromete.</p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Orientación ******************* -->
+  <Content
+    id="orientacion"
+    isAfterContent
+    title="Orientación y contención"
+    items={[
+      {
+        title: 'Escucha sin juicios',
+        description: 'Un espacio seguro para quienes atraviesan una crisis o acompañan a alguien que la atraviesa.',
+      },
+      {
+        title: 'Derivaciones responsables',
+        description: 'Articulamos con equipos de salud mental, escuelas y organismos públicos.',
+      },
+      {
+        title: 'Acompañamiento sostenido',
+        description: 'No es una consulta única: hacemos seguimiento y acompañamos el proceso.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1573497491208-6b1acb260507?auto=format&fit=crop&w=2070&q=80',
+      alt: 'Escucha activa',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Acompañar el camino</h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Posvención + GARE ******************* -->
+  <Content
+    id="postvencion"
+    isReversed
+    isAfterContent
+    title="Posvención y Grupos GARE"
+    items={[
+      {
+        title: 'Sostén entre pares',
+        description: 'Reuniones periódicas donde compartir la experiencia del duelo sin sentirse solo/a.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Coordinación profesional',
+        description: 'Los encuentros son guiados por profesionales formados/as en duelo por suicidio.',
+        icon: 'tabler:heart-rate-monitor',
+      },
+      {
+        title: 'Confidencialidad',
+        description: 'Lo que se comparte en el grupo se cuida con respeto y reserva absoluta.',
+        icon: 'tabler:lock',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1740&q=80',
+      alt: 'Grupo de apoyo',
+    }}
+  >
+    <Fragment slot="content" id="gare">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        GARE: Grupos de Ayuda para Recuperar la Esperanza
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Cómo sumar un taller ******************* -->
+  <Steps
+    title="¿Cómo organizamos un taller o actividad?"
+    items={[
+      {
+        title: '1. <span class="font-medium">Contactanos</span>',
+        description: 'Escribinos por WhatsApp, correo o redes sociales contando quiénes son y qué necesitan.',
+        icon: 'tabler:message',
+      },
+      {
+        title: '2. <span class="font-medium">Diseñamos la propuesta</span>',
+        description: 'Adaptamos la actividad a las características y edades del grupo.',
+        icon: 'tabler:pencil',
+      },
+      {
+        title: '3. <span class="font-medium">Encuentro presencial</span>',
+        description: 'Nuestro equipo se acerca a la institución o comunidad para realizar la actividad.',
+        icon: 'tabler:users',
+      },
+      {
+        title: '4. <span class="font-medium">Seguimiento</span>',
+        description: 'Acompañamos después del taller con materiales y canales de consulta abiertos.',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?auto=format&fit=crop&w=2070&q=80',
+      alt: 'Planificación de talleres',
+    }}
+  />
+
+  <!-- CTA ******************* -->
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Solicitar una actividad', href: '/contacto', icon: 'tabler:calendar-plus' },
+      { text: 'Ver noticias', href: '/noticias', icon: 'tabler:news' },
+    ]}
+  >
+    <Fragment slot="title">¿Querés que llevemos un taller a tu institución?</Fragment>
+    <Fragment slot="subtitle">Trabajamos en Posadas, Misiones y toda la región.</Fragment>
+  </CallToAction>
+</Layout>

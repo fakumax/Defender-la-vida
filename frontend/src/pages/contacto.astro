@@ -1,0 +1,101 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+
+const metadata = {
+  title: 'Contacto',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Aviso emergencia ******************* -->
+  <section class="bg-red-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+      <span class="font-semibold">¿Necesitás ayuda urgente?</span>
+      <a href="tel:135" class="underline font-bold">Llamá al 135 (Prevención)</a>
+      <span class="hidden sm:inline">·</span>
+      <a href="tel:911" class="underline font-bold">o al 911 (Emergencias)</a>
+    </div>
+  </section>
+
+  <!-- Hero ******************* -->
+  <HeroText
+    tagline="Contacto"
+    title="Hablemos"
+    subtitle="Si querés organizar un taller, sumarte como voluntario/a, o simplemente necesitás hablar con alguien, escribinos. Te respondemos lo antes posible."
+  />
+
+  <!-- Formulario ******************* -->
+  <ContactUs
+    id="form"
+    title="Escribinos un mensaje"
+    subtitle="Completá el formulario y nos pondremos en contacto a la brevedad."
+    inputs={[
+      { type: 'text', name: 'name', label: 'Nombre y apellido' },
+      { type: 'email', name: 'email', label: 'Correo electrónico' },
+      { type: 'text', name: 'phone', label: 'Teléfono (opcional)' },
+      { type: 'text', name: 'subject', label: 'Asunto' },
+    ]}
+    textarea={{ label: 'Tu mensaje' }}
+    disclaimer={{
+      label:
+        'Al enviar este formulario, aceptás que tus datos sean utilizados únicamente para responder a tu consulta.',
+    }}
+    description="Respondemos habitualmente dentro de las 48 horas hábiles."
+  />
+
+  <!-- Redes y datos ******************* -->
+  <Features2
+    title="Otros canales"
+    subtitle="Estamos en redes sociales y por los canales tradicionales."
+    columns={2}
+    classes={{ items: { icon: 'w-8 h-8 mb-3 text-primary' } }}
+    items={[
+      {
+        title: 'WhatsApp',
+        description: '+54 9 3764 38-5252 — Escribinos, es el canal más rápido.',
+        icon: 'tabler:brand-whatsapp',
+      },
+      {
+        title: 'Correo electrónico',
+        description: 'defenderlavida@gmail.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Facebook',
+        description: 'facebook.com/defenderlavida',
+        icon: 'tabler:brand-facebook',
+      },
+      {
+        title: 'Instagram',
+        description: '@defenderlavida',
+        icon: 'tabler:brand-instagram',
+      },
+      {
+        title: 'Línea 135',
+        description: 'Línea gratuita de asistencia al suicida (24 hs).',
+        icon: 'tabler:phone',
+      },
+      {
+        title: 'Ubicación',
+        description: 'Posadas, Misiones, Argentina',
+        icon: 'tabler:map-pin',
+      },
+    ]}
+  />
+
+  <!-- Datos legales ******************* -->
+  <section class="px-4 py-12 sm:px-6 mx-auto lg:px-8 max-w-4xl">
+    <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 text-sm text-gray-600 dark:text-slate-400 text-center">
+      <p class="font-semibold text-gray-800 dark:text-slate-200 mb-1">
+        Asociación Civil "Hablemos de Defender la Vida"
+      </p>
+      <p>
+        Personería Jurídica Nº A-2839 · Entidad de Bien Público N°409 · CUIT 30-70972472-6
+      </p>
+      <p>Posadas — Misiones — Argentina</p>
+    </div>
+  </section>
+</Layout>

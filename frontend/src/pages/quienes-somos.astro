@@ -1,0 +1,178 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Quiénes somos',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero ******************* -->
+  <Hero
+    tagline="Quiénes somos"
+    image={{
+      src: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=2070&q=80',
+      alt: 'Comunidad unida',
+    }}
+  >
+    <Fragment slot="title">
+      Asociación Civil <br />
+      <span class="text-accent dark:text-white">"Hablemos de Defender la Vida"</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Nacimos con el firme propósito de prevenir el suicidio en adolescentes y jóvenes en Posadas, Misiones.
+      Trabajamos de manera integral a través de la <strong>prevención, contención y posvención</strong>,
+      acompañando no solo a los jóvenes en situación de riesgo, sino también a su entorno familiar y social.
+    </Fragment>
+  </Hero>
+
+  <!-- Nuestra historia ******************* -->
+  <Content
+    isReversed
+    tagline="Nuestra historia"
+    title="Una asociación nacida del compromiso comunitario"
+    items={[
+      {
+        title: 'Fundada en 2005',
+        description: 'En la ciudad de Posadas, provincia de Misiones, Argentina.',
+        icon: 'tabler:flag',
+      },
+      {
+        title: 'Personería Jurídica Nº A-2839',
+        description: 'Reconocida oficialmente como Asociación Civil.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Entidad de Bien Público N°409',
+        description: 'Declarada de interés comunitario por su labor social.',
+        icon: 'tabler:award',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2069&q=80',
+      alt: 'Encuentro comunitario',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Más de dos décadas defendiendo la vida
+      </h3>
+      <p>
+        En la actualidad, las conductas autolesivas representan una de las principales causas de mortalidad
+        joven en la región. Por eso, desde Posadas, llevamos adelante un trabajo sostenido con instituciones
+        educativas, familias y organizaciones de la sociedad civil.
+      </p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Por qué trabajamos así ******************* -->
+  <Content
+    isAfterContent
+    title="Por qué trabajamos así"
+    items={[
+      {
+        title: 'El entorno importa',
+        description:
+          'Entendemos que el desarrollo de la personalidad es un proceso influenciado por el entorno. Por eso, nuestras intervenciones buscan transformar actitudes violentas.',
+      },
+      {
+        title: 'Convivencia y respeto',
+        description:
+          'Promovemos la convivencia, la resolución pacífica de conflictos y el respeto mutuo como pilares de la salud mental colectiva.',
+      },
+      {
+        title: 'Todos somos parte',
+        description:
+          'Estamos convencidos de que la prevención es posible y eficaz cuando nos involucramos todos: familia, escuela, trabajo y comunidad.',
+      },
+      {
+        title: 'Tejido social fuerte',
+        description:
+          'Buscamos crear contextos positivos que fortalezcan nuestro tejido social y protejan a los más vulnerables.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1740&q=80',
+      alt: 'Manos unidas',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Nuestra mirada</h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Valores ******************* -->
+  <Steps2
+    title="Nuestros valores"
+    subtitle="Lo que nos guía en cada intervención, taller y encuentro."
+    items={[
+      {
+        title: 'Compromiso con la vida',
+        description: 'Cada acción está orientada a proteger, cuidar y fortalecer la vida de los jóvenes de nuestra región.',
+      },
+      {
+        title: 'Escucha activa y empatía',
+        description: 'Creamos espacios seguros donde cada persona pueda ser escuchada sin juicios.',
+      },
+      {
+        title: 'Trabajo en red',
+        description: 'Colaboramos con instituciones públicas, privadas y otras organizaciones de la sociedad civil.',
+      },
+      {
+        title: 'Profesionalismo y ética',
+        description: 'Nuestro equipo actúa con responsabilidad, formación continua y compromiso ético.',
+      },
+    ]}
+  />
+
+  <!-- Estadísticas ******************* -->
+  <Stats
+    title="Nuestro alcance"
+    stats={[
+      { title: 'Años', amount: '20+' },
+      { title: 'Talleres', amount: '50+' },
+      { title: 'Jóvenes', amount: '5k+' },
+      { title: 'Familias', amount: '500+' },
+    ]}
+  />
+
+  <!-- Datos institucionales ******************* -->
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-4xl">
+    <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-4 dark:text-white">Datos institucionales</h2>
+      <ul class="space-y-2 text-gray-700 dark:text-slate-300">
+        <li><strong>Nombre:</strong> Asociación Civil "Hablemos de Defender la Vida"</li>
+        <li><strong>Presidenta:</strong> María Rosa Vargas</li>
+        <li><strong>Personería Jurídica:</strong> Nº A-2839</li>
+        <li><strong>Entidad de Bien Público:</strong> N°409</li>
+        <li><strong>CUIT:</strong> 30-70972472-6</li>
+        <li><strong>Sede:</strong> Posadas, Misiones, Argentina</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA ******************* -->
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Conocé qué hacemos', href: '/que-hacemos', icon: 'tabler:arrow-right' },
+      { text: 'Contactanos', href: '/contacto', icon: 'tabler:mail' },
+    ]}
+  >
+    <Fragment slot="title">Sumate a defender la vida</Fragment>
+    <Fragment slot="subtitle">Tu participación hace la diferencia.</Fragment>
+  </CallToAction>
+</Layout>

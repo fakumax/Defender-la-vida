@@ -1,42 +1,55 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import SinglePost from '~/components/blog/SinglePost.astro';
+import ToBlogLink from '~/components/blog/ToBlogLink.astro';
 import { getPosts } from '~/lib/wp';
+import type { Post } from '~/types';
 
 export async function getStaticPaths() {
-    const posts = await getPosts(100);
-    
-    if (!posts || posts.length === 0) {
-        return [{ params: { slug: 'placeholder' }, props: { post: { title: { rendered: 'Contenido Temporal' }, content: { rendered: '<p>Abrí WordPress y cargá tu primera noticia.</p>' }, excerpt: { rendered: '' }, _embedded: {} } } }];
-    }
+  const wpPosts = await getPosts(100);
 
-    return posts.map((post: any) => ({
-        params: { slug: post.slug },
-        props: { post },
-    }));
+  if (!wpPosts || wpPosts.length === 0) {
+    return [{
+      params: { slug: 'placeholder' },
+      props: {
+        post: {
+          id: '0', slug: 'placeholder', permalink: '/noticias/placeholder',
+          publishDate: new Date(), title: 'Contenido Temporal',
+          excerpt: '', content: '<p>Abrí WordPress y cargá tu primera noticia.</p>',
+        } as Post,
+      },
+    }];
+  }
+
+  return wpPosts.map((p: any) => ({
+    params: { slug: p.slug },
+    props: {
+      post: {
+        id: String(p.id),
+        slug: p.slug,
+        permalink: `/noticias/${p.slug}`,
+        publishDate: new Date(p.date),
+        title: p.title?.rendered?.replace(/<[^>]*>/g, '') ?? '',
+        excerpt: p.excerpt?.rendered?.replace(/<[^>]*>/g, '').trim() ?? '',
+        image: p._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? undefined,
+        author: p._embedded?.['author']?.[0]?.name ?? undefined,
+        content: p.content?.rendered ?? '',
+      } as Post,
+    },
+  }));
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props as { post: Post };
 
 const metadata = {
-  title: post.title.rendered.replace(/<[^>]*>/g, ''),
+  title: post.title,
+  description: post.excerpt,
 };
 ---
 
 <Layout metadata={metadata}>
-  <article class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-4xl">
-    <a href="/noticias" class="text-primary font-semibold hover:underline mb-8 inline-block">← Volver a Noticias</a>
-    
-    <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading dark:text-gray-200" set:html={post.title.rendered} />
-
-    {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
-      <img
-        src={post._embedded['wp:featuredmedia'][0].source_url}
-        alt={post.title.rendered.replace(/<[^>]*>/g, '')}
-        class="w-full h-[400px] object-cover rounded-xl shadow-lg mb-12"
-        loading="lazy"
-      />
-    )}
-
-    <div class="prose prose-lg md:prose-xl dark:prose-invert max-w-none prose-a:text-primary hover:prose-a:underline prose-headings:font-heading prose-img:rounded-xl" set:html={post.content.rendered} />
-  </article>
+  <SinglePost post={post} url={`/noticias/${post.slug}`}>
+    <Fragment set:html={post.content ?? ''} />
+  </SinglePost>
+  <ToBlogLink />
 </Layout>
