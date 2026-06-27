@@ -11,7 +11,7 @@ metadata:
   title:
     default: Hablemos de Defender la Vida
     template: '%s — Defender la Vida'
-  description: 'Asociación Civil dedicada a la prevención, orientación y postvención del suicidio en Posadas, Misiones, Argentina.'
+  description: 'Asociación Civil de voluntarios dedicada a la prevención, orientación y posvención del suicidio en Posadas, Misiones, Argentina.'
   robots:
     index: true
     follow: true

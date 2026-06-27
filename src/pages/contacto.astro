@@ -2,23 +2,57 @@
 import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
 
 const metadata = {
   title: 'Contacto',
 };
 
-const channels = [
+// Líneas de ayuda — priorizamos las de Misiones
+const helplines = [
   {
-    title: 'WhatsApp',
-    value: '+54 9 3764 38-5252',
+    title: 'ChaViS · Misiones',
+    description: 'Centro de Atención Virtual en Salud Mental',
+    phone: '3764 518800',
+    href: 'tel:+543764518800',
+    icon: 'tabler:phone-call',
+    featured: true,
+  },
+  {
+    title: 'Línea de crisis (IPS) · Misiones',
+    description: 'Atención en crisis las 24 hs · solo llamadas',
+    phone: '3765 481000',
+    href: 'tel:+543765481000',
+    icon: 'tabler:urgent',
+    featured: true,
+  },
+  {
+    title: 'Emergencias',
+    description: 'Policía local y emergencias médicas',
+    phone: '911',
+    href: 'tel:911',
+    icon: 'tabler:ambulance',
+  },
+  {
+    title: 'Línea nacional 135',
+    description: 'Asistencia al suicida · alcance nacional',
+    phone: '135',
+    href: 'tel:135',
+    icon: 'tabler:phone',
+  },
+];
+
+// Canales de la asociación
+const contactChannels = [
+  {
+    title: 'WhatsApp / Teléfono',
+    value: '3764 38-5252',
     href: 'https://wa.me/5493764385252',
     icon: 'tabler:brand-whatsapp',
   },
   {
     title: 'Email',
-    value: 'defenderlavida@gmail.com',
-    href: 'mailto:defenderlavida@gmail.com',
+    value: 'defenderlavida2006@gmail.com',
+    href: 'mailto:defenderlavida2006@gmail.com',
     icon: 'tabler:mail',
   },
   {
@@ -34,12 +68,6 @@ const channels = [
     icon: 'tabler:brand-facebook',
   },
   {
-    title: 'Línea 135',
-    value: 'Asistencia al suicida · 24 hs',
-    href: 'tel:135',
-    icon: 'tabler:phone',
-  },
-  {
     title: 'Ubicación',
     value: 'Posadas, Misiones, Argentina',
     icon: 'tabler:map-pin',
@@ -49,12 +77,15 @@ const channels = [
 
 <Layout metadata={metadata}>
   <!-- Aviso emergencia ******************* -->
-  <section class="bg-red-600 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
-      <span class="font-semibold">¿Necesitás ayuda urgente?</span>
-      <a href="tel:135" class="underline font-bold">Llamá al 135 (Prevención)</a>
+  <section id="ayuda" class="bg-red-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-center text-sm sm:text-base">
+      <span class="font-semibold flex items-center gap-2">
+        <Icon name="tabler:alert-triangle" class="w-5 h-5" />
+        ¿Estás en una situación de crisis?
+      </span>
+      <a href="tel:+543765481000" class="underline font-bold">Llamá ahora al 3765 481000 (24 hs)</a>
       <span class="hidden sm:inline">·</span>
-      <a href="tel:911" class="underline font-bold">o al 911 (Emergencias)</a>
+      <a href="tel:911" class="underline font-bold">o al 911</a>
     </div>
   </section>
 
@@ -62,36 +93,55 @@ const channels = [
   <HeroText
     tagline="Contacto"
     title="Hablemos"
-    subtitle="Si querés organizar un taller, sumarte como voluntario/a, o simplemente necesitás hablar con alguien, escribinos. Te respondemos lo antes posible."
+    subtitle="Si querés organizar un taller, sumarte como voluntario/a, o simplemente necesitás hablar con alguien, escribinos por WhatsApp, correo o redes. Te respondemos lo antes posible."
   />
 
-  <!-- Formulario ******************* -->
-  <ContactUs
-    id="form"
-    title="Escribinos un mensaje"
-    subtitle="Completá el formulario y nos pondremos en contacto a la brevedad."
-    inputs={[
-      { type: 'text', name: 'name', label: 'Nombre y apellido' },
-      { type: 'email', name: 'email', label: 'Correo electrónico' },
-      { type: 'text', name: 'phone', label: 'Teléfono (opcional)' },
-      { type: 'text', name: 'subject', label: 'Asunto' },
-    ]}
-    textarea={{ label: 'Tu mensaje' }}
-    disclaimer={{
-      label:
-        'Al enviar este formulario, aceptás que tus datos sean utilizados únicamente para responder a tu consulta.',
-    }}
-    description="Respondemos habitualmente dentro de las 48 horas hábiles."
-  />
+  <!-- Líneas de ayuda ******************* -->
+  <section class="px-4 sm:px-6 mx-auto lg:px-8 max-w-5xl pb-4 md:pb-8">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">Líneas de ayuda</h2>
+      <p class="text-muted mt-2 max-w-2xl mx-auto">
+        Si vos o alguien que conocés está pasando por una situación difícil, no dudes en pedir ayuda.
+        En Misiones contás con estas líneas de atención.
+      </p>
+    </div>
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {helplines.map(({ title, description, phone, href, icon, featured }) => (
+        <li>
+          <a
+            href={href}
+            class={`flex items-start gap-4 p-5 rounded-xl border transition h-full ${
+              featured
+                ? 'border-red-300 dark:border-red-500/40 bg-red-50 dark:bg-red-500/10 hover:border-red-500'
+                : 'border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-primary'
+            }`}
+          >
+            <span class={`flex-shrink-0 w-11 h-11 rounded-full flex items-center justify-center ${featured ? 'bg-red-600 text-white' : 'bg-primary/10 text-primary'}`}>
+              <Icon name={icon} class="w-6 h-6" />
+            </span>
+            <span class="flex flex-col leading-tight">
+              <span class="text-sm font-semibold text-gray-900 dark:text-slate-100">{title}</span>
+              <span class="text-xs text-gray-600 dark:text-slate-400 mt-0.5">{description}</span>
+              <span class="text-lg font-bold text-gray-900 dark:text-white mt-1">{phone}</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="text-xs text-muted text-center mt-4">
+      <strong>Importante:</strong> como asociación no brindamos atención en crisis. Para una emergencia,
+      usá las líneas de arriba o comunicate al 911.
+    </p>
+  </section>
 
   <!-- Redes y datos ******************* -->
   <section class="px-4 sm:px-6 mx-auto lg:px-8 max-w-5xl py-8 md:py-12">
     <div class="text-center mb-6">
-      <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">Otros canales</h2>
-      <p class="text-muted mt-2">También podés encontrarnos acá.</p>
+      <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">Canales de la asociación</h2>
+      <p class="text-muted mt-2">Para consultas, orientación o coordinar charlas y capacitaciones.</p>
     </div>
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-      {channels.map(({ title, value, href, icon }) => {
+      {contactChannels.map(({ title, value, href, icon }) => {
         const Tag = href ? 'a' : 'div';
         return (
           <li>
@@ -115,7 +165,7 @@ const channels = [
   <section class="px-4 py-12 sm:px-6 mx-auto lg:px-8 max-w-4xl">
     <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 text-sm text-gray-600 dark:text-slate-400 text-center">
       <p class="font-semibold text-gray-800 dark:text-slate-200 mb-1">
-        Asociación Civil "Hablemos de Defender la Vida"
+        Asociación Civil "Hablemos de..." Defender la Vida
       </p>
       <p>
         Personería Jurídica Nº A-2839 · Entidad de Bien Público N°409 · CUIT 30-70972472-6

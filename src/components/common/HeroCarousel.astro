@@ -28,7 +28,7 @@ if (!slides?.length) return null;
         <img
           src={s.image}
           alt={s.alt ?? s.title ?? ''}
-          class="absolute inset-0 w-full h-full object-cover"
+          class="absolute inset-0 w-full h-full object-cover object-center"
           loading={i === 0 ? 'eager' : 'lazy'}
           decoding="async"
         />
@@ -93,6 +93,9 @@ if (!slides?.length) return null;
 
 <script>
   function initCarousel(root: HTMLElement) {
+    if (root.dataset.carouselReady === 'true') return;
+    root.dataset.carouselReady = 'true';
+
     const track = root.querySelector<HTMLUListElement>('.carousel-track');
     if (!track) return;
     const slides = Array.from(track.children) as HTMLElement[];
@@ -133,5 +136,10 @@ if (!slides?.length) return null;
     }
   }
 
-  document.querySelectorAll<HTMLElement>('.hero-carousel').forEach(initCarousel);
+  function setupCarousels() {
+    document.querySelectorAll<HTMLElement>('.hero-carousel').forEach(initCarousel);
+  }
+
+  // Se ejecuta en la carga inicial y tras cada navegación con ClientRouter (view transitions)
+  document.addEventListener('astro:page-load', setupCarousels);
 </script>

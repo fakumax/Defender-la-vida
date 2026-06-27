@@ -1,9 +1,12 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
 import Hero from '~/components/widgets/Hero.astro';
+import foto4 from '~/data/4.jpg';
+import foto6 from '~/data/6.jpg';
+import foto55 from '~/data/55.jpg';
 import Content from '~/components/widgets/Content.astro';
 import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
@@ -16,8 +19,8 @@ const metadata = {
   <Hero
     tagline="Quiénes somos"
     image={{
-      src: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=2070&q=80',
-      alt: 'Comunidad unida',
+      src: foto55,
+      alt: 'Taller Hablemos de lo que sentimos — Defender la Vida',
     }}
   >
     <Fragment slot="title">
@@ -26,9 +29,10 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      Nacimos con el firme propósito de prevenir el suicidio en adolescentes y jóvenes en Posadas, Misiones.
-      Trabajamos de manera integral a través de la <strong>prevención, contención y posvención</strong>,
-      acompañando no solo a los jóvenes en situación de riesgo, sino también a su entorno familiar y social.
+      Somos una ONG sin fines de lucro conformada por <strong>voluntarios</strong> de diversos sectores de la comunidad.
+      Nacimos en Posadas, Misiones, con el propósito de prevenir el suicidio y acompañar a las personas en
+      situación de crisis. Trabajamos de manera integral a través de la <strong>prevención, contención y posvención</strong>,
+      acompañando tanto a quienes atraviesan situaciones de riesgo como a su entorno familiar y social.
     </Fragment>
   </Hero>
 
@@ -39,24 +43,24 @@ const metadata = {
     title="Una asociación nacida del compromiso comunitario"
     items={[
       {
-        title: 'Fundada en 2005',
-        description: 'En la ciudad de Posadas, provincia de Misiones, Argentina.',
+        title: 'Inicios en 2004',
+        description: 'Comenzamos a trabajar en la ciudad de Posadas, provincia de Misiones, Argentina.',
         icon: 'tabler:flag',
       },
       {
-        title: 'Personería Jurídica Nº A-2839',
-        description: 'Reconocida oficialmente como Asociación Civil.',
+        title: 'Personería Jurídica desde 2005',
+        description: 'Obtuvimos la Personería Jurídica Nº A-2839 el 8 de junio de 2005.',
         icon: 'tabler:certificate',
       },
       {
-        title: 'Entidad de Bien Público N°409',
-        description: 'Declarada de interés comunitario por su labor social.',
+        title: 'Interés provincial y municipal',
+        description: 'Declarada de interés provincial (2010) y de interés municipal de Posadas (2012).',
         icon: 'tabler:award',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2069&q=80',
-      alt: 'Encuentro comunitario',
+      src: foto4,
+      alt: 'Presentación institucional de Defender la Vida',
     }}
   >
     <Fragment slot="content">
@@ -64,9 +68,9 @@ const metadata = {
         Más de dos décadas defendiendo la vida
       </h3>
       <p>
-        En la actualidad, las conductas autolesivas representan una de las principales causas de mortalidad
-        joven en la región. Por eso, desde Posadas, llevamos adelante un trabajo sostenido con instituciones
-        educativas, familias y organizaciones de la sociedad civil.
+        Desde nuestros inicios sostenemos un trabajo comunitario con instituciones educativas, familias,
+        equipos de salud, fuerzas de seguridad y organizaciones de la sociedad civil, articulando saberes
+        técnicos con presencia humana, empatía y compromiso.
       </p>
     </Fragment>
 
@@ -75,9 +79,32 @@ const metadata = {
     </Fragment>
   </Content>
 
+  <!-- Misión y Visión ******************* -->
+  <section class="px-4 py-12 sm:px-6 mx-auto lg:px-8 max-w-5xl">
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-3">
+          <Icon name="tabler:target-arrow" class="w-7 h-7 text-primary" />
+          <h3 class="text-xl font-bold dark:text-white">Nuestra misión</h3>
+        </div>
+        <p class="text-gray-700 dark:text-slate-300">
+          La prevención, orientación y posvención del suicidio en nuestra comunidad.
+        </p>
+      </div>
+      <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-3">
+          <Icon name="tabler:eye-heart" class="w-7 h-7 text-primary" />
+          <h3 class="text-xl font-bold dark:text-white">Nuestra visión</h3>
+        </div>
+        <p class="text-gray-700 dark:text-slate-300">
+          Defender la vida ante situaciones de crisis que puedan derivar en suicidio.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Por qué trabajamos así ******************* -->
   <Content
-    isAfterContent
     title="Por qué trabajamos así"
     items={[
       {
@@ -102,8 +129,8 @@ const metadata = {
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1740&q=80',
-      alt: 'Manos unidas',
+      src: foto6,
+      alt: 'Día Mundial de la Salud Mental — Defender la Vida',
     }}
   >
     <Fragment slot="content">
@@ -116,29 +143,6 @@ const metadata = {
   </Content>
 
   <!-- Valores ******************* -->
-  <Steps2
-    title="Nuestros valores"
-    subtitle="Lo que nos guía en cada intervención, taller y encuentro."
-    items={[
-      {
-        title: 'Compromiso con la vida',
-        description: 'Cada acción está orientada a proteger, cuidar y fortalecer la vida de los jóvenes de nuestra región.',
-      },
-      {
-        title: 'Escucha activa y empatía',
-        description: 'Creamos espacios seguros donde cada persona pueda ser escuchada sin juicios.',
-      },
-      {
-        title: 'Trabajo en red',
-        description: 'Colaboramos con instituciones públicas, privadas y otras organizaciones de la sociedad civil.',
-      },
-      {
-        title: 'Profesionalismo y ética',
-        description: 'Nuestro equipo actúa con responsabilidad, formación continua y compromiso ético.',
-      },
-    ]}
-  />
-
   <!-- Estadísticas ******************* -->
   <Stats
     title="Nuestro alcance"
@@ -150,13 +154,39 @@ const metadata = {
     ]}
   />
 
+  <!-- Marco legal ******************* -->
+  <section class="px-4 py-12 sm:px-6 mx-auto lg:px-8 max-w-5xl">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading dark:text-white">Marco legal de referencia</h2>
+      <p class="text-muted mt-2">Nuestro trabajo se enmarca en la normativa nacional y provincial vigente.</p>
+    </div>
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {[
+        { ley: 'Ley 25.855', nombre: 'Voluntariado Social', desc: 'Define al voluntario como quien realiza tareas gratuitas, altruistas y de interés general por libre elección.' },
+        { ley: 'Ley 27.130', nombre: 'Prevención del Suicidio (Nacional)', desc: 'Busca disminuir la incidencia del suicidio mediante prevención, asistencia y posvención.' },
+        { ley: 'Ley XVII – Nº 103', nombre: 'Adhesión de Misiones', desc: 'Adhesión provincial a la ley nacional y creación del Centro de Asistencia a Personas en Riesgo de Suicidio.' },
+        { ley: 'Ley 26.657', nombre: 'Salud Mental (Nacional)', desc: 'Reconoce la salud mental como un derecho humano y prioriza la atención comunitaria e interdisciplinaria.' },
+      ].map(({ ley, nombre, desc }) => (
+        <li class="flex gap-4 p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+          <Icon name="tabler:gavel" class="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+          <div>
+            <p class="font-semibold text-gray-900 dark:text-slate-100">{ley} · {nombre}</p>
+            <p class="text-sm text-gray-600 dark:text-slate-400 mt-1">{desc}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
   <!-- Datos institucionales ******************* -->
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-4xl">
     <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-8 shadow-sm">
       <h2 class="text-2xl font-bold mb-4 dark:text-white">Datos institucionales</h2>
       <ul class="space-y-2 text-gray-700 dark:text-slate-300">
-        <li><strong>Nombre:</strong> Asociación Civil "Hablemos de Defender la Vida"</li>
+        <li><strong>Nombre:</strong> Asociación Civil "Hablemos de..." Defender la Vida</li>
+        <li><strong>Naturaleza:</strong> ONG sin fines de lucro conformada por voluntarios</li>
         <li><strong>Presidenta:</strong> María Rosa Vargas</li>
+        <li><strong>Inicios:</strong> 2004 · Personería Jurídica desde 2005</li>
         <li><strong>Personería Jurídica:</strong> Nº A-2839</li>
         <li><strong>Entidad de Bien Público:</strong> N°409</li>
         <li><strong>CUIT:</strong> 30-70972472-6</li>

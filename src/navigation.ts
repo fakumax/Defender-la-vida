@@ -19,7 +19,7 @@ export const headerData = {
       href: getPermalink('/contacto'),
     },
   ],
-  actions: [{ text: 'AYUDA URGENTE · 135', href: 'tel:135', class: 'bg-red-600 hover:bg-red-700' }],
+  actions: [{ text: 'AYUDA EN MISIONES', href: getPermalink('/contacto#ayuda'), class: 'bg-red-600 hover:bg-red-700' }],
 };
 
 export const footerData = {
@@ -44,9 +44,11 @@ export const footerData = {
       title: 'Contacto',
       links: [
         { text: 'Posadas, Misiones, Argentina', href: '#' },
+        { text: 'ChaViS (Misiones): 3764-518800', href: 'tel:+543764518800' },
+        { text: 'Línea de crisis IPS: 3765-481000', href: 'tel:+543765481000' },
         { text: 'WhatsApp: 3764-385252', href: 'https://wa.me/5493764385252' },
         { text: 'Emergencias: 911', href: 'tel:911' },
-        { text: 'Línea 135 (Prevención)', href: 'tel:135' },
+        { text: 'Línea nacional 135 (Prevención)', href: 'tel:135' },
       ],
     },
     {
@@ -60,13 +62,13 @@ export const footerData = {
   ],
   secondaryLinks: [
     { text: 'Presidenta: María Rosa Vargas', href: '#' },
-    { text: 'Fundada en Posadas, Misiones (2005)', href: '#' },
+    { text: 'Inicios en 2004 · Personería Jurídica desde 2005', href: '#' },
   ],
   socialLinks: [
     { ariaLabel: 'WhatsApp', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/5493764385252' },
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/AsocDefenderLaVida/' },
     { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/asocdefenderlavida/' },
-    { ariaLabel: 'Email', icon: 'tabler:mail', href: 'mailto:defenderlavida@gmail.com' },
+    { ariaLabel: 'Email', icon: 'tabler:mail', href: 'mailto:defenderlavida2006@gmail.com' },
   ],
   footNote: `
     © Hablemos de Defender la Vida · Posadas, Misiones, Argentina · Todos los derechos reservados.<br />

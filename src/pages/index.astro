@@ -8,12 +8,17 @@ import Content from '~/components/widgets/Content.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import HeroCarousel from '~/components/common/HeroCarousel.astro';
-import imagen1 from '~/assets/images/Imagen1.png';
-import imagen2 from '~/assets/images/Imagen2.png';
+import foto1 from '~/data/1.jpg';
+import foto11 from '~/data/11.jpg';
+import foto22 from '~/data/22.jpg';
+import foto33 from '~/data/33.jpg';
+import foto44 from '~/data/44.jpg';
 
 const slides = [
-  { image: imagen1.src, alt: 'Defender la Vida — prevención y acompañamiento' },
-  { image: imagen2.src, alt: 'Comunidad que cuida — Defender la Vida' },
+  { image: foto44.src, alt: 'Pedir ayuda y contactos de atencion en Misiones' },
+  { image: foto11.src, alt: 'Hablar del dolor también es cuidar la vida' },
+  { image: foto22.src, alt: '¿Cómo cuidar en estos momentos? — Defender la Vida' },
+  { image: foto33.src, alt: 'Cada vida es valiosa — Defender la Vida' },
 ];
 
 const metadata = {
@@ -35,11 +40,17 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      Asociación Civil dedicada a la <strong>prevención, contención y posvención</strong> del suicidio
-      en adolescentes y jóvenes. Acompañamos a quienes atraviesan situaciones de riesgo y a sus familias.
-      <span class="block mt-2 font-semibold text-red-600">
-        Si estás pasando un momento difícil, llamá al 135 (línea gratuita) o al 911.
-      </span>
+      Asociación Civil de voluntarios dedicada a la <strong>prevención, orientación y posvención</strong> del suicidio.
+      Acompañamos a personas en situación de riesgo, a sus familias y a quienes atravesaron la pérdida de un ser querido.
+    </Fragment>
+
+    <Fragment slot="content">
+      <div class="flex justify-center mt-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <a href="tel:+543765481000" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-600 text-white font-semibold text-sm hover:bg-red-700 transition shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          ¿Estás en crisis? Llamá al 3765 481000 (24 hs)
+        </a>
+      </div>
     </Fragment>
 
     <Fragment slot="image">
@@ -73,8 +84,8 @@ const metadata = {
       },
     ]}
     image={{
-      src: '~/assets/images/Imagen2.png',
-      alt: 'Comunidad que cuida — Defender la Vida',
+      src: foto1,
+      alt: 'Hablar del dolor también es cuidar la vida — Defender la Vida',
     }}
   >
     <Fragment slot="content">
@@ -82,7 +93,7 @@ const metadata = {
         "Defender la Vida" nace en Posadas, Misiones
       </h3>
       <p>
-        Con el firme propósito de prevenir el suicidio en adolescentes y jóvenes. Creemos que la prevención
+        En 2004, con el firme propósito de prevenir el suicidio en la comunidad. Creemos que la prevención
         es posible y eficaz cuando nos involucramos todos: familia, escuela, trabajo y comunidad.
       </p>
     </Fragment>
@@ -143,12 +154,13 @@ const metadata = {
   <CallToAction
     actions={[
       { variant: 'primary', text: 'Contactanos', href: '/contacto', icon: 'tabler:mail' },
-      { text: 'Línea 135', href: 'tel:135', icon: 'tabler:phone' },
+      { text: 'Ayuda en Misiones', href: '/contacto#ayuda', icon: 'tabler:phone-call' },
     ]}
   >
     <Fragment slot="title">¿Necesitás hablar con alguien?</Fragment>
     <Fragment slot="subtitle">
-      No estás solo/a. Escribinos o llamá a la línea gratuita de prevención <strong>135</strong>.
+      No estás solo/a. Si estás en Misiones, llamá a <strong>3764 518800</strong> o <strong>3765 481000</strong>.
+      También podés usar la línea nacional <strong>135</strong>.
     </Fragment>
   </CallToAction>
 </Layout>
