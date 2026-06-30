@@ -17,41 +17,46 @@ if (!slides?.length) return null;
 ---
 
 <div
-  class="hero-carousel relative w-full overflow-hidden rounded-2xl shadow-lg"
+  class="hero-carousel w-full"
   data-autoplay={autoplay}
   aria-roledescription="carousel"
   aria-label={ariaLabel}
 >
-  <ul class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth">
-    {slides.map((s, i) => (
-      <li class="relative min-w-full snap-start aspect-[16/7] bg-gray-100 dark:bg-slate-800" aria-roledescription="slide" aria-label={`${i + 1} de ${slides.length}`}>
-        <img
-          src={s.image}
-          alt={s.alt ?? s.title ?? ''}
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading={i === 0 ? 'eager' : 'lazy'}
-          decoding="async"
-        />
-        {(s.title || s.excerpt) && (
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 md:p-10 text-white">
-            {s.title && <h3 class="text-xl md:text-3xl font-bold font-heading" set:html={s.title} />}
-            {s.excerpt && <p class="mt-2 max-w-2xl text-sm md:text-base" set:html={s.excerpt} />}
-          </div>
-        )}
-      </li>
-    ))}
-  </ul>
+  <div class="carousel-viewport relative w-full overflow-hidden rounded-2xl shadow-lg">
+    <ul class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth">
+      {slides.map((s, i) => (
+        <li class="relative min-w-full snap-start aspect-[16/9] bg-gray-100 dark:bg-slate-800" aria-roledescription="slide" aria-label={`${i + 1} de ${slides.length}`}>
+          <img
+            src={s.image}
+            alt={s.alt ?? s.title ?? ''}
+            class="absolute inset-0 w-full h-full object-cover object-center"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+          {(s.title || s.excerpt) && (
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 md:p-10 text-white">
+              {s.title && <h3 class="text-xl md:text-3xl font-bold font-heading" set:html={s.title} />}
+              {s.excerpt && <p class="mt-2 max-w-2xl text-sm md:text-base" set:html={s.excerpt} />}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    {slides.length > 1 && (
+      <>
+        <button type="button" class="carousel-btn prev" aria-label="Slide anterior">‹</button>
+        <button type="button" class="carousel-btn next" aria-label="Slide siguiente">›</button>
+      </>
+    )}
+  </div>
 
   {slides.length > 1 && (
-    <>
-      <button type="button" class="carousel-btn prev" aria-label="Slide anterior">‹</button>
-      <button type="button" class="carousel-btn next" aria-label="Slide siguiente">›</button>
-      <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {slides.map((_, i) => (
-          <button type="button" class="dot" data-idx={i} aria-label={`Ir al slide ${i + 1}`}></button>
-        ))}
-      </div>
-    </>
+    <div class="carousel-dots mt-3 flex justify-center gap-2">
+      {slides.map((_, i) => (
+        <button type="button" class="dot" data-idx={i} aria-label={`Ir al slide ${i + 1}`}></button>
+      ))}
+    </div>
   )}
 </div>
 
@@ -70,12 +75,16 @@ if (!slides?.length) return null;
     color: #111;
     font-size: 1.5rem;
     line-height: 1;
-    display: flex;
+    /* Ocultas en mobile: ahí se navega con el dedo (swipe) */
+    display: none;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     transition: background .15s ease;
     z-index: 10;
+  }
+  @media (min-width: 768px) {
+    .carousel-btn { display: flex; }
   }
   .carousel-btn:hover { background: #fff; }
   .carousel-btn.prev { left: 0.75rem; }
@@ -85,10 +94,13 @@ if (!slides?.length) return null;
     width: 0.6rem;
     height: 0.6rem;
     border-radius: 9999px;
-    background: rgba(255,255,255,0.5);
+    background: rgba(0,0,0,0.25);
     transition: background .15s ease, transform .15s ease;
   }
-  .dot[aria-current="true"] { background: #fff; transform: scale(1.3); }
+  .dot[aria-current="true"] { background: rgba(0,0,0,0.7); transform: scale(1.3); }
+
+  :global(.dark) .dot { background: rgba(255,255,255,0.3); }
+  :global(.dark) .dot[aria-current="true"] { background: rgba(255,255,255,0.9); }
 </style>
 
 <script>
